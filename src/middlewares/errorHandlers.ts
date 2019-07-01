@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction, Application } from 'express';
-import { HTTPClientError, HTTP404Error } from '../utils/httpErrors';
+import { HTTPClientError, HTTP404Error } from '../utils';
 
 const handle404Error = (app: Application) => {
     app.use((req: Request, res: Response) => {
