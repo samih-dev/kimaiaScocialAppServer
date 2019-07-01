@@ -1,17 +1,30 @@
 import { Application } from 'express';
 import cors from 'cors';
-import parser from 'body-parser';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import compression from 'compression';
+import passport from 'passport';
+
+import passportConfig from '../config/passport.config';
 
 const handleCors = (app: Application) => app.use(cors({ credentials: true, origin: true }));
 
 const handleBodyRequestParsing = (app: Application) => {
-    app.use(parser.urlencoded({ extended: true }));
-    app.use(parser.json());
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+};
+
+const handleCookieParsing = (app: Application) => {
+    app.use(cookieParser());
 };
 
 const handleCompression = (app: Application) => {
     app.use(compression());
 };
 
-export default [handleCors, handleBodyRequestParsing, handleCompression];
+const handleAuth = (app: Application) => {
+    app.use(passport.initialize());
+    passportConfig(passport);
+};
+
+export default [handleCors, handleBodyRequestParsing, handleCompression, handleCookieParsing, handleAuth];

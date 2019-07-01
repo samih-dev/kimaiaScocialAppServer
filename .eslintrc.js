@@ -13,6 +13,7 @@ module.exports =  {
       // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/no-unused-vars": "off",
-      "@typescript-eslint/explicit-member-accessibility": "off"
+      "@typescript-eslint/explicit-member-accessibility": "off",
+      "@typescript-eslint/interface-name-prefix":"off"
     },
   };
