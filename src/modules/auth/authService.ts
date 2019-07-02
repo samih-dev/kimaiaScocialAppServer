@@ -8,7 +8,7 @@ export class AuthService {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     static async generateJWTToken(payload: any) {
         const token = await jwt.sign(payload, secret, { expiresIn: 36000 });
-        return `Bearer ${token}`;
+        return `bearer ${token}`;
     }
 
     static async hashPassword(password: string) {

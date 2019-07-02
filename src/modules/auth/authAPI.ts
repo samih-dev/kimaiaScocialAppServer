@@ -48,11 +48,13 @@ router.post('/loginOrRegister', async (req, res) => {
     }
 });
 
-router.get('/', async (req, res, next) => {
-    passport.authenticate('jwt', (err, user, info) => {
-        debugger;
-        res.status(httpStatus.OK).send('REACHED');
-    })(req, res, next);
+router.get('/', passport.authenticate('jwt', { session: false }), async (req, res, next) => {
+    // passport.authenticate('jwt', (err, user, info) => {
+    //     // issue trying to solve - invalid signture error
+    //     debugger;
+    //     res.status(httpStatus.OK).send('REACHED');
+    // })(req, res, next);
+    res.status(httpStatus.OK).send('REACHED');
 });
 
 export { router };

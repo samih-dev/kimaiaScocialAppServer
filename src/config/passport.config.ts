@@ -5,7 +5,7 @@ import { Strategy, ExtractJwt } from 'passport-jwt';
 import { User, IUser } from './../modules/users/models';
 
 dotenv.config();
-const secret = process.env.SECRET || 'some other secret as default';
+const secret = process.env.JWT_SECERT || 'some other secret as default';
 
 const opts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
