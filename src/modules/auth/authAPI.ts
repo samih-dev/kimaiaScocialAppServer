@@ -4,7 +4,6 @@ import httpStatus from 'http-status';
 import { User } from './../users/models';
 import { HTTP400Error } from '../../utils';
 import { AuthService } from './authService';
-import passport = require('passport');
 
 const router = express.Router();
 
@@ -48,13 +47,8 @@ router.post('/loginOrRegister', async (req, res) => {
     }
 });
 
-router.get('/', passport.authenticate('jwt', { session: false }), async (req, res, next) => {
-    // passport.authenticate('jwt', (err, user, info) => {
-    //     // issue trying to solve - invalid signture error
-    //     debugger;
-    //     res.status(httpStatus.OK).send('REACHED');
-    // })(req, res, next);
-    res.status(httpStatus.OK).send('REACHED');
-});
+// router.get('/', passport.authenticate('jwt', {session: false}), async (req, res, next) => {
+//     res.status(httpStatus.OK).send('REACHED');
+// });
 
 export { router };
