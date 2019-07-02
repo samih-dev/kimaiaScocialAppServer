@@ -17,10 +17,7 @@ router.post('/getPostsFeed', async (req, res) => {
 
     const postRepo = new PostsRepo();
 
-    const models = await postRepo.find(
-        { $or: [{ author: userId }, { author: { $in: friendsIds } }] },
-        { createdAt: 'desc' },
-    );
+    const models = await postRepo.getOwnAndFriendsPosts(userId, friendsIds);
 
     res.status(httpStatus.OK).json(models);
 });

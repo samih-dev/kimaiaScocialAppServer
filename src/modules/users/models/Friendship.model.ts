@@ -5,11 +5,11 @@ const FriendshipSchema = new Schema({
     isApproved: {
         type: Boolean,
     },
-    askedUser: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    targetUser: {
+    userAsked: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
@@ -21,8 +21,8 @@ const FriendshipSchema = new Schema({
 interface IFriendship extends mongoose.Document {
     _id: string;
     isApproved: boolean;
-    askedUser: string | IUser;
-    targetUser: string | IUser;
+    user: string | IUser;
+    userAsked: string | IUser;
     requestDate: Date;
 }
 

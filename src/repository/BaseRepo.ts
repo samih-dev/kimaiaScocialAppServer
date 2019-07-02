@@ -41,7 +41,7 @@ export abstract class BaseRepo<T extends mongoose.Document> implements IWrite<T>
         return rec;
     }
 
-    private toObjectId(_id: string): mongoose.Types.ObjectId {
+    protected toObjectId(_id: string): mongoose.Types.ObjectId {
         return mongoose.Types.ObjectId.createFromHexString(_id);
     }
 }
