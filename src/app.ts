@@ -1,17 +1,16 @@
 import express from 'express';
-import dotenv from 'dotenv';
 
 import { mwCommons, mwErrors } from './middlewares';
 import { applyMiddleware, applyRoutes } from './utils';
 import { routesMap } from './modules';
 
-import dbConfig from './config/db.config';
+import dotenv from 'dotenv';
+import { config } from './config';
 
 const app = express();
 
 dotenv.config();
-
-dbConfig();
+config();
 
 applyMiddleware(mwCommons, app);
 

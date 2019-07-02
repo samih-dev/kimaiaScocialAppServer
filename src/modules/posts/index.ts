@@ -1,1 +1,1 @@
-export * from './postsAPI';
+export * from './posts.api';

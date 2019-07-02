@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import { PassportStatic } from 'passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 
-import { User, IUser } from './../modules/users/models';
+import { User, IUser, UsersRepo } from '../modules/users';
 
 dotenv.config();
 const secret = process.env.JWT_SECERT || 'some other secret as default';
@@ -14,16 +14,17 @@ const opts = {
 
 export default (passport: PassportStatic) => {
     passport.use(
-        new Strategy(opts, (payload, done) => {
-            User.findById(payload.id).then(user => {
-                if (user) {
-                    return done(null, {
-                        id: user.id,
-                        username: user.username,
-                    });
-                }
-                return done(null, false);
-            });
+        new Strategy(opts, async (payload, done) => {
+            const userRepo = new UsersRepo();
+            const user = await userRepo.findById(payload.id);
+            if (user) {
+                return done(null, {
+                    id: user.id,
+                    username: user.username,
+                });
+            }
+
+            return done(null, false);
         }),
     );
 };

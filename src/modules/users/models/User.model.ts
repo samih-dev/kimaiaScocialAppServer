@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema, mongo } from 'mongoose';
 
 const UserSchema = new Schema({
     username: {
@@ -10,6 +10,17 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
+    posts: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Post',
+        },
+    ],
+    friendsIds: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+        },
+    ],
 });
 
 interface IUser extends mongoose.Document {
@@ -17,6 +28,6 @@ interface IUser extends mongoose.Document {
     password: string;
 }
 
-const User = mongoose.model<IUser>('User', UserSchema);
+const User = mongoose.model<IUser>('User', UserSchema, 'users');
 
 export { User, IUser };

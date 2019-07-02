@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import passport from 'passport';
 
-import passportConfig from '../config/passport.config';
+import { passportConfig } from '../config';
 
 const handleCors = (app: Application) => app.use(cors({ credentials: true, origin: true }));
 

@@ -2,7 +2,7 @@ export * from './httpErrors';
 
 import { Application, Router } from 'express-serve-static-core';
 import { EModuleName } from '../modules';
-import passport, { AuthenticateOptions } from 'passport';
+import passport from 'passport';
 
 type Wrapper = (app: Application) => void;
 
