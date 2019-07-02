@@ -3,7 +3,7 @@ import moment from 'moment-timezone';
 import { IUser } from '../../users/models';
 
 const PostSchema = new Schema({
-    body: {
+    content: {
         type: String,
         required: true,
     },
@@ -19,8 +19,8 @@ const PostSchema = new Schema({
 }).pre('save', function(next) {
     const self = this as IPost;
 
-    if (!self.createAt) {
-        self.createAt = moment().toDate();
+    if (!self.createdAt) {
+        self.createdAt = moment().toDate();
     }
 
     next();
@@ -28,8 +28,8 @@ const PostSchema = new Schema({
 
 interface IPost extends mongoose.Document {
     _id: string | undefined;
-    createAt: Date | undefined;
-    body: string | undefined;
+    createdAt: Date | undefined;
+    content: string | undefined;
     author: string | IUser;
 }
 

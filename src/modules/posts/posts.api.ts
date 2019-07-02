@@ -8,7 +8,11 @@ const router = express.Router();
 router.post('/', async (req, res) => {
     const postRepo = new PostsRepo();
     const model = await postRepo.create(req.body);
-    res.status(httpStatus.CREATED).json(model);
+    const modelPopulated = await postRepo.getPostWithRelationsPopulated({
+        id: model._id as string,
+        relations: ['author'],
+    });
+    res.status(httpStatus.CREATED).json(modelPopulated);
 });
 
 router.post('/getPostsFeed', async (req, res) => {

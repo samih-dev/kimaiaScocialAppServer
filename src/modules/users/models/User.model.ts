@@ -21,6 +21,11 @@ const UserSchema = new Schema({
             type: mongoose.Schema.Types.ObjectId,
         },
     ],
+    usersIdsWithRequest: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+        },
+    ],
 });
 
 interface IUser extends mongoose.Document {

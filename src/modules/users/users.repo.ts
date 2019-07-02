@@ -47,9 +47,9 @@ export class UsersRepo extends BaseRepo<IUser> {
         return recs;
     }
 
-    async getNonFriends(userId: string, friendsIds: string[]): Promise<IUser[]> {
+    async getNonFriends(userId: string, idsToExclude: string[]): Promise<IUser[]> {
         var recs = (await User.find({
-            $nin: [this.toObjectId(userId), ...friendsIds.map(this.toObjectId)],
+            $nin: [this.toObjectId(userId), ...idsToExclude.map(this.toObjectId)],
         })) as IUser[];
         return recs;
     }

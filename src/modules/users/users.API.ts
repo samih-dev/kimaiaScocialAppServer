@@ -1,17 +1,18 @@
 import express from 'express';
+import httpStatus from 'http-status';
 
 import { UsersRepo } from './users.repo';
 
 const router = express.Router();
 
 router.post('/friendRequest', async (req, res) => {
-    const { userId, userAsked } = req.body;
+    const { userId, askedUserId } = req.body;
 
     const userRepo = new UsersRepo();
 
-    await userRepo.friendRequest(userId, userAsked);
+    await userRepo.friendRequest(userId, askedUserId);
 
-    res.status(httpStatus.CREATED).send();
+    res.status(httpStatus.CREATED).json(askedUserId);
 });
 
 router.post('/approveFriendRequest', async (req, res) => {
@@ -41,14 +42,14 @@ router.post('/getFriendsAndFriendsRequests', async (req, res) => {
 
     const friendsAndFriendsReqs = await usersRepo.getFriendsAndFriendsRequests(userId);
 
-    res.status(httpStatus.OK).json(friendsAndFriendsReqs);
+    res.status(httpStatus.OK).json({ list: friendsAndFriendsReqs, userId });
 });
 
 router.post('/getNonFriends', async (req, res) => {
-    const { userId, friendsIds } = req.body;
+    const { userId, friendsIds, usersIdsWithRequests } = req.body;
     const userRepo = new UsersRepo();
 
-    const nonFriendsList = await userRepo.getNonFriends(userId, friendsIds);
+    const nonFriendsList = await userRepo.getNonFriends(userId, friendsIds.concat(usersIdsWithRequests));
 
     res.status(httpStatus.OK).json(nonFriendsList);
 });
