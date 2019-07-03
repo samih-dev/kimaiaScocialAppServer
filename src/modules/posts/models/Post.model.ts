@@ -3,7 +3,7 @@ import moment from 'moment-timezone';
 import { IUser } from '../../users/models';
 
 const PostSchema = new Schema({
-    content: {
+    body: {
         type: String,
         required: true,
     },
@@ -29,7 +29,7 @@ const PostSchema = new Schema({
 interface IPost extends mongoose.Document {
     _id: string | undefined;
     createdAt: Date | undefined;
-    content: string | undefined;
+    body: string | undefined;
     author: string | IUser;
 }
 

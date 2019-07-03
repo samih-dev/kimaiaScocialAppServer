@@ -22,7 +22,7 @@ router.post('/approveFriendRequest', async (req, res) => {
 
     await userRepo.approveFriendRequest(userId, userIdToApprove);
 
-    res.status(httpStatus.OK).send();
+    res.status(httpStatus.OK).json(userIdToApprove);
 });
 
 router.post('/denyFriendRequest', async (req, res) => {
@@ -32,7 +32,7 @@ router.post('/denyFriendRequest', async (req, res) => {
 
     await userRepo.denyFriendRequest(userId, userIdToDeny);
 
-    res.status(httpStatus.NO_CONTENT).send();
+    res.status(httpStatus.OK).json(userIdToDeny);
 });
 
 router.post('/getFriendsAndFriendsRequests', async (req, res) => {
