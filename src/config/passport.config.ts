@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import { PassportStatic } from 'passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 
-import { User, IUser, UsersRepo } from '../modules/users';
+import { UsersRepo } from '../modules/users';
 
 dotenv.config();
 const secret = process.env.JWT_SECERT || 'some other secret as default';
